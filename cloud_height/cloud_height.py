@@ -1,5 +1,5 @@
 # Fetch weather data from DarkSky servers, compute cloud height and emit to server
-# Usage: cronjob from 6a to 6p, every 5 minutes 
+# Usage: cronjob from 6a to 6p, every 5 minutes
 # */5 6-18 * * * /usr/bin/python3 cloud_height.py
 
 import datetime
@@ -28,7 +28,7 @@ def calc_height(temp, dew):
 
 def main():
     # Initialize socket io connection to app server
-    sock = initialize_socketio('http://cloudtrackingcloudserver.herokuapp.com/')
+    sock = initialize_socketio('https://cloudcomputingv2.herokuapp.com/')
     # sock = initialize_socketio('http://localhost:3001/')
 
     parameters = {
@@ -50,7 +50,7 @@ def main():
     # GET current weather data
     response = requests.get(f"https://api.darksky.net/forecast/{parameters['pass']}/{parameters['lat']},{parameters['lon']}?exclude=minutely,hourly,daily,alerts,flags")
     current = response.json()['currently']
-    
+
     # Parse variables we're interested in
     t = current['temperature']
     dew = current['dewPoint']
@@ -74,7 +74,7 @@ def main():
         "latitude": parameters['lat'],
         "longitude": parameters['lon']
     }
-    
+
     print("[", datetime.datetime.now().strftime("%d.%b %Y %H:%M:%S"), "] Pressure:", pressure, "mb", "Temp:", t, "Dewpoint:", dew, "CBH =", cbh, "ft/F")
 
     # Emit to server and disconnect

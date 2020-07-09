@@ -15,7 +15,7 @@ const CENTER = [28.601722, -81.198545]
 class Map extends Component {
   constructor(props) {
     super(props);
-    
+
     subscribeToCoverage((err, coverage_img) => {
       // If already exists, update the coverage image
       this.coverageOverlay.setUrl(coverage_img);
@@ -51,7 +51,7 @@ class Map extends Component {
     //       { maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] }),
       var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-      }),      
+      }),
         // terrain   = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
         //   { maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] })
         terrain =  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -69,13 +69,13 @@ class Map extends Component {
       zoom: 14,
       layers: [ satellite, terrain ]
     });
-    
+
     this.shadowOverlay = L.imageOverlay('', [[28.42000000001, -81.42000000001], [28.42000000002, -81.42000000002]]);
     this.shadowOverlay.addTo(this.map);
-    
+
     this.coverageOverlay = L.imageOverlay('', [[28.42000000001, -81.42000000001], [28.42000000002, -81.42000000002]]);
     this.coverageOverlay.addTo(this.map);
-    
+
     var coverageBorderOptions = {
       "color": "#d35fb7",
       "weight": 2,
@@ -89,7 +89,7 @@ class Map extends Component {
       "fill": false,
       "fillOpacity": .1
     };
-        
+
     this.coverageBorder = L.rectangle([[28.42000000001, -81.42000000001], [28.42000000002, -81.42000000002]], coverageBorderOptions)
     this.coverageBorder.addTo(this.map)
 
@@ -102,7 +102,7 @@ class Map extends Component {
       "Coverage": this.coverageOverlay,
       "Coverage Bounds": this.coverageBorder
     }
-  
+
     L.control.layers(baseMaps, overlayMaps).addTo(this.map);
 
     var north = L.control({position: "bottomright"});

@@ -15,7 +15,7 @@ const videoOverlayOptions = {};
 class Home extends Component {
       constructor(props) {
       super(props);
-    
+
       subscribeToData((err, data) => {
         this.setState(data);
         this.setState({ time: new Date() })
@@ -24,7 +24,7 @@ class Home extends Component {
       subscribeToCoverageData((err, data) => {
         this.setState(data);
       });
-      
+
       this.state = {
         cloud_coverage: '',
         temperature: '',
@@ -41,7 +41,7 @@ class Home extends Component {
       .then( (data) => {
         this.setState(data)
       }).catch(console.log)
-      
+
       fetch('/weather')
       .then( res => res.json() )
       .then( (data) => {
@@ -60,7 +60,7 @@ class Home extends Component {
                 <div>
                 <JsmpegPlayer
                     wrapperClassName="video-wrapper"
-                    videoUrl="ws://cloudtrackingcloudserver.herokuapp.com/stream"
+                    videoUrl="ws://cloudcomputingv2.herokuapp.com/stream"
                     // videoUrl="ws://localhost:3001/stream"
                     options={videoOptions}
                     overlayOptions={videoOverlayOptions}
@@ -78,7 +78,7 @@ class Home extends Component {
               <Card.Text>Dewpoint: {this.state.dew_point} °F</Card.Text>
               <Card.Text>Barometric Pressure: {this.state.barometric_pressure} mb</Card.Text>
               <Card.Text>Cloud Base Height (CBH): {this.state.cloud_base_height} ft</Card.Text>
-              <Card.Text style={{ fontStyle: "italic", fontSize: "14px" }}>Last updated:  
+              <Card.Text style={{ fontStyle: "italic", fontSize: "14px" }}>Last updated:
                 <Moment format="LLL">{this.state.time}</Moment>
               </Card.Text>
             </Card.Body>
@@ -87,9 +87,9 @@ class Home extends Component {
           <Col sm={8}>
             <Card border="light">
               <Card.Body>
-                
+
                 <Card.Text style={{color:"slategray"}}>CLOUD MONITORING</Card.Text>
-                
+
                 <React.Fragment>
                   <Cloudmotion />
                 </React.Fragment>
@@ -102,8 +102,8 @@ class Home extends Component {
             </Card>
           </Col>
           </Row>
-            
-        ); 
+
+        );
     }
 }
 
